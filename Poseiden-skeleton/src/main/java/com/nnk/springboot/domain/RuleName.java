@@ -3,6 +3,7 @@ package com.nnk.springboot.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import java.sql.Timestamp;
 
 @Getter
 @Setter
+@Data
 @Entity
 @Table(name = "rulename")
 public class RuleName {
