@@ -16,12 +16,9 @@ import javax.validation.Valid;
 
 @Controller
 public class UserController {
-	
     @Autowired
     private UserRepository userRepository;
     
-  //  @Autowired 
-    //private UserService
 
     @RequestMapping("/user/list")
     public String home(Model model)
@@ -39,6 +36,7 @@ public class UserController {
     public String validate(@Valid User user, BindingResult result, Model model) {
         if (!result.hasErrors()) {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            user.setPassword(encoder.encode(user.getPassword()));
             userRepository.save(user);
             model.addAttribute("users", userRepository.findAll());
             return "redirect:/user/list";
@@ -49,7 +47,7 @@ public class UserController {
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-  //     user;
+        user.setPassword("");
         model.addAttribute("user", user);
         return "user/update";
     }
@@ -62,8 +60,8 @@ public class UserController {
         }
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-    //    user.setPassword(encoder.encode(user.getPassword()));
-    //    user.setId(id);
+        user.setPassword(encoder.encode(user.getPassword()));
+        user.setId(id);
         userRepository.save(user);
         model.addAttribute("users", userRepository.findAll());
         return "redirect:/user/list";
