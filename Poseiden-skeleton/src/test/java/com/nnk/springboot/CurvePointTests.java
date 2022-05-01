@@ -16,10 +16,10 @@ import java.util.Optional;
 @SpringBootTest
 public class CurvePointTests {
 
-	@Autowired
+/*	@Autowired
 	private CurvePointRepository curvePointRepository;
 
-/*	@Test
+	@Test
 	public void curvePointTest() {
 		CurvePoint curvePoint = new CurvePoint(10, 10d, 30d);
 

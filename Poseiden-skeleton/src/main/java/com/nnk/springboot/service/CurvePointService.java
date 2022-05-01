@@ -1,4 +1,4 @@
-package service;
+package com.nnk.springboot.service;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nnk.springboot.domain.CurvePoint;
@@ -14,6 +15,7 @@ import com.nnk.springboot.repositories.CurvePointRepository;
 
 import javassist.NotFoundException;
 
+@Service
 public class CurvePointService {
 	
 	@Autowired
@@ -68,6 +70,6 @@ public class CurvePointService {
 		throw new NotFoundException("curvePoint Id : "+id+" not exist");
 	}
 	
-	
+
 
 }
