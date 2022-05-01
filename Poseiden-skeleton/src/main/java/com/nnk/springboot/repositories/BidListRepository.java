@@ -6,8 +6,10 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 
+@Repository
 public interface BidListRepository extends JpaRepository<BidList, Integer> {
 	
 	@Query(value = "SELECT * FROM user WHERE id = ?1", nativeQuery=true)

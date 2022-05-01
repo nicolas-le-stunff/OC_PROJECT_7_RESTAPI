@@ -1,4 +1,4 @@
-package service;
+package com.nnk.springboot.service;
 
 import java.util.List;
 
