@@ -16,10 +16,10 @@ import java.util.Optional;
 @SpringBootTest
 public class TradeTests {
 
-	@Autowired
+/*	@Autowired
 	private TradeRepository tradeRepository;
 
-/*	@Test
+	@Test
 	public void tradeTest() {
 		Trade trade = new Trade("Trade Account", "Type");
 

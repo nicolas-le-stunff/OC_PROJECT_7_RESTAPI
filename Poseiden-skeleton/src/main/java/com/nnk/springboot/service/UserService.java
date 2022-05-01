@@ -1,4 +1,4 @@
-package service;
+package com.nnk.springboot.service;
 
 import java.time.LocalDateTime;
 import java.util.List;

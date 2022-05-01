@@ -16,10 +16,10 @@ import java.util.Optional;
 @SpringBootTest
 public class RatingTests {
 
-	@Autowired
+/*	@Autowired
 	private RatingRepository ratingRepository;
 
-/*	@Test
+	@Test
 	public void ratingTest() {
 		Rating rating = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
 

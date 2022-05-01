@@ -1,9 +1,9 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.service.CurvePointService;
 
 import javassist.NotFoundException;
-import service.CurvePointService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

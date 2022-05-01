@@ -16,10 +16,10 @@ import java.util.Optional;
 @SpringBootTest
 public class RuleTests {
 
-	@Autowired
+/*	@Autowired
 	private RuleNameRepository ruleNameRepository;
 
-/*	@Test
+	@Test
 	public void ruleTest() {
 		RuleName rule = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
 
