@@ -2,6 +2,8 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
+import com.nnk.springboot.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,8 +18,12 @@ import javax.validation.Valid;
 
 @Controller
 public class UserController {
+	
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private UserService userService;
     
 
     @RequestMapping("/user/list")
@@ -35,9 +41,7 @@ public class UserController {
     @PostMapping("/user/validate")
     public String validate(@Valid User user, BindingResult result, Model model) {
         if (!result.hasErrors()) {
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            user.setPassword(encoder.encode(user.getPassword()));
-            userRepository.save(user);
+            userService.createUser(user);
             model.addAttribute("users", userRepository.findAll());
             return "redirect:/user/list";
         }
