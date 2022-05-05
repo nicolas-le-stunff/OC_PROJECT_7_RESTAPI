@@ -19,7 +19,7 @@ public class LoginController {
 	private static Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 
-    @GetMapping("/login000")
+    @GetMapping("/login")
     public ModelAndView login() {
     	logger.info(" login page");
         ModelAndView mav = new ModelAndView();
