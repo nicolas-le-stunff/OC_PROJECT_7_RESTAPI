@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BidListRepository extends JpaRepository<BidList, Integer> {
 	
-	@Query(value = "SELECT * FROM user WHERE id = ?1", nativeQuery=true)
-    Optional<BidList> findById(Integer id);
+
 
 }

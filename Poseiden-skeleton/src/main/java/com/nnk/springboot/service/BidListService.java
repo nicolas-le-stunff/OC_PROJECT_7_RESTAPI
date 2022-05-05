@@ -30,7 +30,7 @@ public class BidListService {
 	public BidList getBidListById(Integer id) throws NotFoundException {
 		log.info("Get bidList ID : "+id);
 		if(bidListRepository.existsById(id)) {
-			return bidListRepository.findById(id).get();
+			return bidListRepository.getOne(id);
 		}
 		log.error("bidList Id : "+id+" not exist");
 		throw new NotFoundException("bidList Id : "+id+" not exist");
