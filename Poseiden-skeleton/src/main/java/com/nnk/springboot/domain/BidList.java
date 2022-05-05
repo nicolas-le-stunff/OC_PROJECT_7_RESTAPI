@@ -17,12 +17,14 @@ import lombok.Setter;
 @Table(name = "bidlist")
 public class BidList {
 
-	 @Id
+	  @Id
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	  private Integer id;
 
+	  @NotBlank(message = "Account is mandatory")
 	  private String account;
 	  
+	  @NotBlank(message = "Account is mandatory")
 	  private String type;
 
 	  private double bidQuantity;

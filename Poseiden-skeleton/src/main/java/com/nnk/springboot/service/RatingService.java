@@ -19,7 +19,6 @@ public class RatingService {
 	
 	@Autowired
 	private RatingRepository ratingRepository;
-	
 
 	private Logger log = LoggerFactory.getLogger(RatingService.class);
 	
