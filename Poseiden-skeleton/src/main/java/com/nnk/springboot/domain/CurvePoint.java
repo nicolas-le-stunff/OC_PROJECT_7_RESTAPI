@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import java.sql.Timestamp;
 
 @Getter
@@ -17,6 +20,7 @@ public class CurvePoint {
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	  private Integer id;
 
+	  @NotNull(message = "must not be null")
 	  private Integer curveId;
 
 	  private Timestamp asOfDate;

@@ -28,7 +28,7 @@ public class CurveController {
     @RequestMapping("/curvePoint/list")
     public String home(Model model){        
     	List<CurvePoint> curvePoint = curvePointService.getAllCurvePoint();
-    	model.addAttribute("curvePoint", curvePoint);
+    	model.addAttribute("curvePointList", curvePoint);
         return "curvePoint/list";
     }
 
@@ -42,7 +42,7 @@ public class CurveController {
     @PostMapping("/curvePoint/validate")
     public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
         if (result.hasErrors()) {
-        	model.addAttribute("curvePointDto", curvePoint);         
+        	model.addAttribute("curvePoint", curvePoint);         
             return "curvePoint/add";
         }
         curvePointService.createCurvePoint(curvePoint);
@@ -66,10 +66,10 @@ public class CurveController {
         try {
         	if(result.hasErrors()) {
         		model.addAttribute("curvePoint",curvePoint);
-        		return "redirect:/curvePoint/list";
+        		return "curvePoint/update";
         	}
         	curvePointService.updateCurvePoint(id,curvePoint);
-        	return "curvePoint/update";
+        	return "redirect:/curvePoint/list";
         }catch (NotFoundException e) {
         	return "errorNotFound";
         }
