@@ -15,9 +15,59 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/rating/update/{id}(id=${rating.id})}" th:object="${rating}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to edit the values of Rating, there are 2 buttons: Update data and Cancel to the Rating
-			 -->
+		<div class="form-group">
+				<input
+						type="hidden" th:field="*{id}" class="form-control">
+			</div>
+
+			<div class="row">
+				<div class="form-group col-xs-6">
+					<label>Moodys Rating</label>
+					<input
+							type="text" th:field="*{moodysRating}" class="form-control" id="moodysRatingInput"
+							aria-describedby="moodysRatingHelp" placeholder="Moodys Rating"
+							th:value="${rating.moodysRating}">
+					<p th:if="${#fields.hasErrors('moodysRating')}" class="label label-danger" th:errors="*{moodysRating}"></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-xs-6">
+					<label>Sand P Rating</label>
+					<input
+							type="text" th:field="*{sandPRating}" class="form-control" id="sandPRatingInput"
+							aria-describedby="sandPRatingHelp" placeholder="Sand P Rating"
+							th:value="${rating.sandPRating}">
+					<p th:if="${#fields.hasErrors('sandPRating')}" class="label label-danger" th:errors="*{sandPRating}"></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-xs-6">
+					<label>Fitch Rating</label>
+					<input
+							type="text" th:field="*{fitchRating}" class="form-control" id="fitchRatingInput"
+							aria-describedby="fitchRatingHelp" placeholder="Fitch Rating"
+							th:value="${rating.fitchRating}">
+					<p th:if="${#fields.hasErrors('fitchRating')}" class="label label-danger" th:errors="*{fitchRating}"></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-xs-6">
+					<label>Order Number</label>
+					<input
+							type="number" th:field="*{orderNumber}" class="form-control" id="orderNumberInput"
+							aria-describedby="orderNumberHelp" placeholder="Order Number"
+							th:value="${rating.orderNumber}">
+					<p th:if="${#fields.hasErrors('orderNumber')}" class="label label-danger" th:errors="*{orderNumber}"></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<a class="btn btn-danger" href="/rating/list" role="button">Cancel</a>
+				<button type="submit" class="btn btn-primary">Update rating</button>
+			</div>
 		</form>
 	</div>
 
