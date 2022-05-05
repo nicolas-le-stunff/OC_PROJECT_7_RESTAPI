@@ -1,9 +1,8 @@
-package config;
+package com.nnk.springboot.config;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -14,11 +13,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.nnk.springboot.service.CustomUserDetailsService;
+
 @Configuration
-@EnableAutoConfiguration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
     
@@ -30,7 +31,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
-    
+    @Bean
+	public UserDetailsService userDetailsService() {
+		return new CustomUserDetailsService();
+	} 
 	public boolean isAuthenticated() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication == null || AnonymousAuthenticationToken.class.
@@ -58,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	http.authorizeRequests()
 		.antMatchers("/css/**").permitAll()
 		.anyRequest()
-		.authenticated()
+		.permitAll()
 		.and()
 		.formLogin()
 		.loginPage("/login")
@@ -70,11 +74,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.logout()
 		.logoutSuccessUrl("/login?logout").permitAll()
 		.and()
-		.oauth2Login()
+		/*.oauth2Login()
 		.loginPage("/login").permitAll()
 		.failureUrl("/login?error")
 		.defaultSuccessUrl("/bidList/list")
-		.and()
+		.and()*/
 		.logout()
 		.logoutSuccessUrl("/login?logout").permitAll();
     }
