@@ -9,8 +9,6 @@ import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 
 
-import java.time.LocalDateTime;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,15 +19,20 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	private static Logger logger = LoggerFactory.getLogger(UserService.class);
+	private static Logger log = LoggerFactory.getLogger(UserService.class);
 
-	public void createUser(User user) {
-		user.setPassword(passwordEncoder().encode(user.getPassword()));
-		user.setFullname(user.getFullname());
-		user.setUsername(user.getUsername());
-		user.setRole(user.getRole());
-		logger.info("new user :" + user.getFullname() +" "+ user.getUsername());
-		userRepository.save(user);
+	public User createUser(User user) {
+		if(!userRepository.existsByUsername(user.getUsername())) {
+			user.setPassword(passwordEncoder().encode(user.getPassword()));
+			user.setFullname(user.getFullname());
+			user.setUsername(user.getUsername());
+			user.setRole(user.getRole());
+			log.info("new user :" + user.getFullname() +" "+ user.getUsername());
+			return userRepository.save(user);
+		}
+		log.error("User already exists : username "+user.getUsername());
+		throw new RuntimeException("User already exists : username "+user.getUsername());
+		
 	}
 	
 	private PasswordEncoder passwordEncoder() {
