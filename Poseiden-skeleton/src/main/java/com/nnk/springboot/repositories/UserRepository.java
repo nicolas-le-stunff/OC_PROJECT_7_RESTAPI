@@ -11,7 +11,9 @@ import com.nnk.springboot.domain.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecificationExecutor<User> {
 	
-    @Query(value = "SELECT * FROM user WHERE username = ?1", nativeQuery=true)
+    @Query(value = "SELECT * FROM users WHERE username = ?1", nativeQuery=true)
     User findByUsername(String username);
+    
+    boolean existsByUsername(String username);
 
 }
