@@ -19,13 +19,9 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.nnk.springboot.controllers.CurveController;
 import com.nnk.springboot.controllers.TradeController;
-import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.Trade;
-import com.nnk.springboot.repositories.CurvePointRepository;
 import com.nnk.springboot.repositories.TradeRepository;
-import com.nnk.springboot.service.CurvePointService;
 import com.nnk.springboot.service.TradeService;
 
 import javassist.NotFoundException;
@@ -57,7 +53,7 @@ public class TradeControllerTest {
 
     @Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void getCurvePointTest() throws Exception {
+    public void getTradeTest() throws Exception {
 
         mockMvc.perform(get("/trade/list"))
                 .andDo(print())
@@ -67,7 +63,7 @@ public class TradeControllerTest {
     
     @Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void getCurvePointAddTest() throws Exception {
+    public void getTradeAddTest() throws Exception {
         mockMvc.perform(get("/trade/add"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -78,7 +74,7 @@ public class TradeControllerTest {
     
     @Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void postCurvePointTest() throws Exception {
+    public void postTradeTest() throws Exception {
 		trade.setAccount("account");
 		trade.setType("type");
 		trade.setBuyQuantity(1.0);
@@ -96,7 +92,7 @@ public class TradeControllerTest {
 
     @Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void postCurvePointWithErrorTest() throws Exception {
+    public void postTradeWithErrorTest() throws Exception {
         mockMvc.perform(post("/trade/validate")
                 .param("account", trade.getAccount())
                 .param("type", trade.getType())
@@ -110,7 +106,7 @@ public class TradeControllerTest {
 
     @Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void getCurvePointUpdateByExistingIdTest() throws Exception {
+    public void getTradetUpdateByExistingIdTest() throws Exception {
 		trade.setAccount("account");
 		trade.setType("type");
 		trade.setBuyQuantity(1.0);
@@ -126,7 +122,7 @@ public class TradeControllerTest {
 
     @Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void getCurvePointUpdateByUnknownIdTest() throws Exception {
+    public void getTradeUpdateByUnknownIdTest() throws Exception {
 		trade.setAccount("account");
 		trade.setType("type");
 		trade.setBuyQuantity(1.0);
@@ -147,7 +143,7 @@ public class TradeControllerTest {
     
     @Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void postCurvePointUpdateTest() throws Exception {
+    public void postTradeUpdateTest() throws Exception {
 		trade.setAccount("account");
 		trade.setType("type");
 		trade.setBuyQuantity(1.0);
@@ -168,7 +164,7 @@ public class TradeControllerTest {
 
 	@Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void postCurvePointUpdateWithErrorTest() throws Exception {
+    public void postTradeUpdateWithErrorTest() throws Exception {
 		
         mockMvc.perform(post("/trade/update/1")
                 .param("account", trade.getAccount())
@@ -187,7 +183,7 @@ public class TradeControllerTest {
 
     @Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void getCurvePointDeleteByIdTest() throws Exception {
+    public void getTradeDeleteByIdTest() throws Exception {
 
         mockMvc.perform(get("/trade/delete/1"))
                 .andDo(print())

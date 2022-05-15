@@ -54,7 +54,7 @@ public class RatingControllerTest {
 
     @Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void getCurvePointTest() throws Exception {
+    public void getRatingTest() throws Exception {
 
         mockMvc.perform(get("/rating/list"))
                 .andDo(print())
@@ -64,7 +64,7 @@ public class RatingControllerTest {
     
     @Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void getCurvePointAddTest() throws Exception {
+    public void getRatingAddTest() throws Exception {
         mockMvc.perform(get("/rating/add"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -75,7 +75,7 @@ public class RatingControllerTest {
     
     @Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void postCurvePointTest() throws Exception {
+    public void postRatingTest() throws Exception {
     	rating.setOrderNumber(1);
     	rating.setFitchRating("2");
     	rating.setSandpRating("3");
@@ -95,7 +95,7 @@ public class RatingControllerTest {
 
     @Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void postCurvePointWithErrorTest() throws Exception {
+    public void postRatingWithErrorTest() throws Exception {
         mockMvc.perform(post("/rating/validate")
                 .param("orderNumber", String.valueOf(rating.getOrderNumber()))
                 .param("sandpRating", String.valueOf(rating.getSandpRating()))
@@ -110,7 +110,7 @@ public class RatingControllerTest {
 
     @Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void getCurvePointUpdateByExistingIdTest() throws Exception {
+    public void getRatingUpdateByExistingIdTest() throws Exception {
     	rating.setOrderNumber(1);
     	rating.setFitchRating("2");
     	rating.setSandpRating("3");
@@ -127,7 +127,7 @@ public class RatingControllerTest {
 
     @Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void getCurvePointUpdateByUnknownIdTest() throws Exception {
+    public void getRatingUpdateByUnknownIdTest() throws Exception {
     	rating.setOrderNumber(1);
     	rating.setFitchRating("2");
     	rating.setSandpRating("3");
@@ -150,7 +150,7 @@ public class RatingControllerTest {
     
     @Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void postCurvePointUpdateTest() throws Exception {
+    public void postRatingUpdateTest() throws Exception {
     	rating.setOrderNumber(1);
     	rating.setFitchRating("2");
     	rating.setSandpRating("3");
@@ -173,7 +173,7 @@ public class RatingControllerTest {
 
 	@Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void postCurvePointUpdateWithErrorTest() throws Exception {
+    public void postRatingUpdateWithErrorTest() throws Exception {
 		
         mockMvc.perform(post("/rating/update/1")
                 .param("orderNumber", String.valueOf(rating.getOrderNumber()))
@@ -192,7 +192,7 @@ public class RatingControllerTest {
 
     @Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void getCurvePointDeleteByIdTest() throws Exception {
+    public void getRatingDeleteByIdTest() throws Exception {
 
         mockMvc.perform(get("/rating/delete/1"))
                 .andDo(print())

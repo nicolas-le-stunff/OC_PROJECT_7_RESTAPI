@@ -19,17 +19,9 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.nnk.springboot.controllers.CurveController;
-import com.nnk.springboot.controllers.RatingController;
 import com.nnk.springboot.controllers.RuleNameController;
-import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.RuleName;
-import com.nnk.springboot.repositories.CurvePointRepository;
-import com.nnk.springboot.repositories.RatingRepository;
 import com.nnk.springboot.repositories.RuleNameRepository;
-import com.nnk.springboot.service.CurvePointService;
-import com.nnk.springboot.service.RatingService;
 import com.nnk.springboot.service.RuleNameService;
 
 import javassist.NotFoundException;
