@@ -57,7 +57,7 @@ public class CurveController {
             model.addAttribute("curvePoint", curvePointUpdates);
             return "curvePoint/update";
         } catch (NotFoundException e) {
-            return "notFound";
+            return "errorNotFound";
         }
     }
 

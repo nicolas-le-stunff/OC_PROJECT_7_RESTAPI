@@ -56,7 +56,7 @@ public class TradeController {
         	model.addAttribute("trade",tradeUpdate);
         	return "trade/update";
         }catch(NotFoundException e) {  
-        return "notFound";
+        return "errorNotFound";
         }
     }
 
@@ -70,7 +70,7 @@ public class TradeController {
         	tradeService.updateTrade(id,trade);
         	return "redirect:/trade/list";
         }catch(NotFoundException e) {
-        	return "notFound";
+        	return "errorNotFound";
         }
     }
 

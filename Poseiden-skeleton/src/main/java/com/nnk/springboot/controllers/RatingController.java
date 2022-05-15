@@ -56,7 +56,7 @@ public class RatingController {
 			model.addAttribute("rating",rating);
 			return "rating/update";
 		} catch (NotFoundException e) {
-			return "notFound";
+			return "errorNotFound";
 		}
      
     }
@@ -67,12 +67,12 @@ public class RatingController {
         try {
         	if(result.hasErrors()) {
         		model.addAttribute("rating", rating);
-        		return "ratig/update";
+        		return "redirect:/rating/update";
         	}
         	ratingService.updateRating(id, rating);
         	return "redirect:/rating/list";
         }catch(NotFoundException e) {
-        	return "notFound";
+        	return "errorNotFound";
         }
     }
 

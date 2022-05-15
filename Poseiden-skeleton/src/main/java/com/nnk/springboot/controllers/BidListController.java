@@ -47,7 +47,7 @@ public class BidListController {
     		return "bidList/add";
     	}
     	bidListService.createNewBidList(bid);
-        return "bidList/list";
+        return "redirect:/bidList/list";
     }
 
     @GetMapping("/bidList/update/{id}")
@@ -65,11 +65,11 @@ public class BidListController {
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList, BindingResult result, Model model) {
         try {
             if (result.hasErrors()) {
-                bidListService.updateBidList(id, bidList);
-                return "redirect:/bidList/list";
+                model.addAttribute("bidList", bidList);
+                return "bidList/update";
             }
-            model.addAttribute("bidList", bidList);
-            return "bidList/update";
+            bidListService.updateBidList(id, bidList);
+            return "redirect:/bidList/list";
         } catch (NotFoundException e) {
             return "errorNotFound";
         }

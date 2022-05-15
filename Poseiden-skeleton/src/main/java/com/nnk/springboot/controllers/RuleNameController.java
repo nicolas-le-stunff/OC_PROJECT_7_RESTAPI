@@ -55,7 +55,7 @@ public class RuleNameController {
         	model.addAttribute("ruleName",ruleName);
         	  return "ruleName/update";
         }catch(NotFoundException e) {
-        	return "notFound";
+        	return "errorNotFound";
         }
     }
 
@@ -69,7 +69,7 @@ public class RuleNameController {
         	ruleNameService.updateRuleName(id, ruleName);
         	 return "redirect:/ruleName/list";
         }catch (NotFoundException e) {
-        	return "notFound";
+        	return "errorNotFound";
         }
     }
 
