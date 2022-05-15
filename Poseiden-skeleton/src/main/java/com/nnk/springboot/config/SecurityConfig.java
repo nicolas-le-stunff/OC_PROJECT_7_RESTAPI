@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.nnk.springboot.service.CustomOAuth2UserService;
 import com.nnk.springboot.service.CustomUserDetailsService;
 
 @Configuration
@@ -25,6 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     
     @Autowired
     DataSource dataSource;
+    
+    @Autowired
+    private CustomOAuth2UserService userOAuth2Service;
     
 
     @Bean
@@ -62,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	http.authorizeRequests()
 		.antMatchers("/css/**").permitAll()
 		.anyRequest()
-		.permitAll()
+		.authenticated()
 		.and()
 		.formLogin()
 		.loginPage("/login")
@@ -74,11 +78,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.logout()
 		.logoutSuccessUrl("/login?logout").permitAll()
 		.and()
-		/*.oauth2Login()
+		.oauth2Login()
 		.loginPage("/login").permitAll()
 		.failureUrl("/login?error")
 		.defaultSuccessUrl("/bidList/list")
-		.and()*/
+		.userInfoEndpoint()
+		.userService(userOAuth2Service)
+		.and()
+		.and()
 		.logout()
 		.logoutSuccessUrl("/login?logout").permitAll();
     }

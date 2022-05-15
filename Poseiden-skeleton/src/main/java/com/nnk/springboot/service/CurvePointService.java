@@ -47,7 +47,7 @@ public class CurvePointService {
 	}
 	
 	public CurvePoint getCurvePointById(Integer id) throws NotFoundException {
-		log.info("Get a curvePoint by ID");
+		log.info("Get curvePoint ID : "+id);
 		if(curveRepository.existsById(id)) {
 			return curveRepository.getOne(id);
 		}
