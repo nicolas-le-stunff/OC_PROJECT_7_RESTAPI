@@ -24,9 +24,7 @@ public class UserServiceTest {
 	private UserService userService;
 	
 	@Test
-	public void createUserTest() {
-		
-	
+	public void createUserTest() {	
 		User user = new User();
 		user.setFullname("fullName_test");
 		user.setId(1);
@@ -35,8 +33,6 @@ public class UserServiceTest {
 		user.setUsername("username_test");
 		Mockito.when(userRepository.existsByUsername(user.getUsername())).thenReturn(false);
 		userService.createUser(user);
-		
-		
 		
 		Mockito.verify(userRepository,Mockito.times(1)).save(any());
 		

@@ -2,18 +2,17 @@ package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.repositories.CurvePointRepository;
-import com.nnk.springboot.service.CurvePointService;
-
 import javassist.NotFoundException;
 
-import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.stubbing.Answer;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -22,7 +21,6 @@ import static org.mockito.ArgumentMatchers.any;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -33,16 +31,28 @@ public class CurvePointServiceTests {
 	
 	@InjectMocks
 	private CurvePointService curvePointService;
+	
+	private CurvePoint curve = new CurvePoint();
+	private CurvePoint curve2 = new CurvePoint();
 
-	@Test
-	public void createCurvePointTest() {
-		Mockito.verify(curvePointRepository,Mockito.times(0)).save(any());
+	@Before
+	public void init() {
 		
-		CurvePoint curve = new CurvePoint();
 		curve.setId(1);
 		curve.setCurveId(2);
 		curve.setTerm(3);
 		curve.setValue(4);
+
+		curve2.setId(2);
+		curve2.setCurveId(4);
+		curve2.setTerm(6);
+		curve2.setValue(4);
+	}
+	
+
+	@Test
+	public void createCurvePointTest() {
+		Mockito.verify(curvePointRepository,Mockito.times(0)).save(any());
 		
 		curvePointService.createCurvePoint(curve);
 		
@@ -51,16 +61,8 @@ public class CurvePointServiceTests {
 	}
 	
 	@Test
-	public void updateCurvePointTest() {	
+	public void updateCurvePointTest()throws NotFoundException {	
 		Mockito.when(curvePointRepository.existsById(1)).thenReturn(true);
-		
-		
-		CurvePoint curve = new CurvePoint();
-		curve.setId(1);
-		curve.setCurveId(2);
-		curve.setTerm(3);
-		curve.setValue(4);
-		
 		Mockito.when(curvePointRepository.getOne(1)).thenReturn(curve);
 		
 		
@@ -68,41 +70,35 @@ public class CurvePointServiceTests {
 		curveUpdate.setId(1);
 		curveUpdate.setCurveId(2);
 		curveUpdate.setTerm(5);
-		curveUpdate.setValue(4);
+		curveUpdate.setValue(4);	
 		
 		
-		
-		try {
-			curvePointService.updateCurvePoint(1, curveUpdate);
-			CurvePoint curveTest = curvePointService.getCurvePointById(1);
+		curvePointService.updateCurvePoint(1, curveUpdate);
+		CurvePoint curveTest = curvePointService.getCurvePointById(1);
 			
-			assertEquals(5,curveTest.getTerm(),0);
-			
-			
-		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
-	
+		assertEquals(5,curveTest.getTerm(),0);
+	}
+
+	@Test(expected = NotFoundException.class)
+	public void updateCurvePointTestThrowsError()throws NotFoundException {	
+		Mockito.when(curvePointRepository.existsById(1)).thenReturn(true);
+		Mockito.when(curvePointRepository.getOne(1)).thenReturn(curve);
 		
+		
+		CurvePoint curveUpdate = new CurvePoint();
+		curveUpdate.setId(1);
+		curveUpdate.setCurveId(2);
+		curveUpdate.setTerm(5);
+		curveUpdate.setValue(4);	
+		
+		
+		curvePointService.updateCurvePoint(5, curveUpdate);
+
 	}
 	
 	@Test
 	public void getAllCurvePointTest() {
-		
 	
-		CurvePoint curve = new CurvePoint();
-		curve.setId(1);
-		curve.setCurveId(2);
-		curve.setTerm(3);
-		curve.setValue(4);
-		
-		CurvePoint curve2 = new CurvePoint();
-		curve2.setId(2);
-		curve2.setCurveId(4);
-		curve2.setTerm(6);
-		curve2.setValue(4);
 		
 		List<CurvePoint> curvePointList = new ArrayList<>();
 		curvePointList.add(curve);
@@ -117,21 +113,25 @@ public class CurvePointServiceTests {
 		assertEquals(allCurvePoint.size(),2);
 	}
 	
-	/*@Test
-	public void curvePointTest() {
-		CurvePoint curvePoint = new CurvePoint(10, 10d, 30d);
+	
+	@Test
+	public void deleteCurvePointTest() throws NotFoundException {
+		Mockito.verify(curvePointRepository,Mockito.times(0)).save(any());
+		
+		curvePointService.createCurvePoint(curve);
+		
+		Mockito.verify(curvePointRepository,Mockito.times(1)).save(any());
+		
+		curvePointService.deleteCurvePoint(1);
+		
+		Mockito.verify(curvePointRepository,Mockito.times(1)).deleteById(any());
 
-
-
-		// Find
-		List<CurvePoint> listResult = curvePointRepository.findAll();
-		Assert.assertTrue(listResult.size() > 0);
-
-		// Delete
-		Integer id = curvePoint.getId();
-		curvePointRepository.delete(curvePoint);
-		Optional<CurvePoint> curvePointList = curvePointRepository.findById(id);
-		Assert.assertFalse(curvePointList.isPresent());
-	}*/
-
+	}
+	
+	@Test(expected = NotFoundException.class)
+	public void getCurvePointByIdNotExistTest() throws NotFoundException {
+		
+		assertEquals(curvePointService.getCurvePointById(1), 0);
+		
+	}
 }
