@@ -63,8 +63,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-	http.authorizeRequests()
-		.antMatchers("/css/**").permitAll()
+	http.csrf().disable()
+		.authorizeRequests()
+		.antMatchers("/css/**","/login","/login/*","/static/*").permitAll()
+		//.antMatchers("/user/*").hasAnyRole("ADMIN")
 		.anyRequest()
 		.authenticated()
 		.and()
@@ -72,6 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.loginPage("/login")
 		.usernameParameter("username")
 		.passwordParameter("password")
+		.permitAll()
 		.failureUrl("/login?error")
 		.defaultSuccessUrl("/bidList/list")
 		.and()
@@ -79,7 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.logoutSuccessUrl("/login?logout").permitAll()
 		.and()
 		.oauth2Login()
-		.loginPage("/login").permitAll()
+		.loginPage("/oauth2/authorization/github").permitAll()
 		.failureUrl("/login?error")
 		.defaultSuccessUrl("/bidList/list")
 		.userInfoEndpoint()
