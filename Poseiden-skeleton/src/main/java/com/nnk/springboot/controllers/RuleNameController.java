@@ -1,9 +1,8 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.RuleName;
-import com.nnk.springboot.service.RuleNameService;
+import java.util.List;
 
-import javassist.NotFoundException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
+import com.nnk.springboot.domain.RuleName;
+import com.nnk.springboot.service.RuleNameService;
 
-import javax.validation.Valid;
+import javassist.NotFoundException;
 
 @Controller
 public class RuleNameController {

@@ -1,9 +1,8 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.service.BidListService;
+import java.util.List;
 
-import javassist.NotFoundException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
+import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.service.BidListService;
 
-import javax.validation.Valid;
+import javassist.NotFoundException;
 
 
 @Controller
@@ -72,6 +72,9 @@ public class BidListController {
             return "redirect:/bidList/list";
         } catch (NotFoundException e) {
             return "errorNotFound";
+            
+            
+            
         }
     }
 

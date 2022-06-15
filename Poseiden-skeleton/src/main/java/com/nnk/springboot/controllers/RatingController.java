@@ -1,9 +1,9 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.service.RatingService;
+import java.security.Principal;
+import java.util.List;
 
-import javassist.NotFoundException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
-import java.util.List;
 
-import javax.validation.Valid;
+import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.service.RatingService;
+
+import javassist.NotFoundException;
 
 @Controller
 public class RatingController {
@@ -25,10 +28,12 @@ public class RatingController {
 	private RatingService ratingService;
 
     @RequestMapping("/rating/list")
-    public String home(Model model)
+    public String home(Model model,Principal user)
     {
         List<Rating> ratingList = ratingService.getAllRating();
         model.addAttribute("ratingList",ratingList);
+        model.addAttribute("user",user.toString());
+        
         return "rating/list";
     }
 

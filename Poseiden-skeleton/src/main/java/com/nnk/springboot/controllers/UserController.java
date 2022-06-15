@@ -1,10 +1,14 @@
 package com.nnk.springboot.controllers;
 
+
+import com.nnk.springboot.domain.CustomUserDetails;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.security.Principal;
 
 import javax.validation.Valid;
 
@@ -24,13 +30,21 @@ public class UserController {
     
     @Autowired
     private UserService userService;
+
+
+
     
 
     @RequestMapping("/user/list")
-    public String home(Model model)
-    {
-        model.addAttribute("users", userRepository.findAll());
-        return "user/list";
+    public String home(Model model,Principal user){
+    	CustomUserDetails userdetails =(CustomUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	String ok = userdetails.getRole();
+    	if(userdetails.getRole().equals("ADMIN")) {
+    		  model.addAttribute("users", userRepository.findAll());
+    	      return "user/list";
+    	}
+    	return "403";
+      
     }
 
     @GetMapping("/user/add")
