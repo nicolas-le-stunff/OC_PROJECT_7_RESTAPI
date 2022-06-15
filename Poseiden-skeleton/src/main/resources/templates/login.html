@@ -3,17 +3,14 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>Poseidon</title>
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
-    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-    
+  	<link rel="stylesheet" href="../../css/bootstrap.min.css" >
 </head>
 <body>
     <div class="container text-center mt-5">
 	    <div class="row justify-content-center px-5">
 	        <form name="f" th:action="@{/login}" method="post" class="col-md-4 border-5 rounded pt-4 pb-5">
 					<div class="form-actions">
-	        			<button type="submit" style="background-image:linear-gradient(to right, #61B959, #8AC34A);" class="btn text-white px-3 font-weight-bold">Poseidon</button>
+	        			<button type="submit" style="background-image:linear-gradient(to right, #61B959, #8AC34A);" class="btn text-white px-3 font-weight-bold">Poseiden</button>
 	        		</div>
 	        		<div th:if="${param.error}" class="alert alert-error">
 	        			Invalid username and password.
@@ -32,6 +29,9 @@
 	        
 	        		<div class="form-actions mt-4">
 	        			<button type="submit" class="btn btn-primary px-5 font-weight-bold">Login</button>
+	        		</div> 	
+	        		<div class="form-actions mt-4">
+	        			<a href="http://localhost:9091/oauth2/authorization/github">Log with Github</a>
 	        		</div> 	
 	        </form>
         </div>
