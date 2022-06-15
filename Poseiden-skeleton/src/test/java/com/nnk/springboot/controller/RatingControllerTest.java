@@ -9,8 +9,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -43,8 +44,8 @@ public class RatingControllerTest {
     
     
 
-    @BeforeEach
-    private void addCurve() {
+    @Before
+    public void addCurve() {
     	rating.setOrderNumber(1);
     	rating.setFitchRating("2");
     	rating.setSandpRating("3");
@@ -103,8 +104,8 @@ public class RatingControllerTest {
                 .param("fitchRating", String.valueOf(rating.getFitchRating()))
                 .with(csrf()))
                 .andDo(print())
-                .andExpect(view().name("rating/add"))
-                .andExpect(status().is2xxSuccessful());
+                .andExpect(view().name("redirect:/rating/list"))
+                .andExpect(status().is3xxRedirection());
             
     }
 
@@ -182,7 +183,7 @@ public class RatingControllerTest {
                 .param("fitchRating", String.valueOf(rating.getFitchRating()))
                 .with(csrf()))
                 .andDo(print())
-                .andExpect(view().name("redirect:/rating/update"))
+                .andExpect(view().name("redirect:/rating/list"))
                 .andExpect(status().is3xxRedirection());
      
             

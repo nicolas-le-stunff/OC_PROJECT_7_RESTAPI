@@ -9,8 +9,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -43,8 +43,8 @@ public class TradeControllerTest {
     
     
 
-    @BeforeEach
-    private void addTrade() {
+    @Before
+    public void addTrade() {
 		trade.setAccount("account");
 		trade.setType("type");
 		trade.setBuyQuantity(1.0);
@@ -99,8 +99,8 @@ public class TradeControllerTest {
                 .param("buyQuantity", String.valueOf(trade.getBuyQuantity()))
                 .with(csrf()))
                 .andDo(print())
-                .andExpect(view().name("trade/add"))
-                .andExpect(status().is2xxSuccessful());
+                .andExpect(view().name("redirect:/trade/list"))
+                .andExpect(status().is3xxRedirection());
             
     }
 
@@ -172,10 +172,8 @@ public class TradeControllerTest {
                 .param("buyQuantity", String.valueOf(trade.getBuyQuantity()))
                 .with(csrf()))
                 .andDo(print())
-                .andExpect(view().name("trade/update"))
-                .andExpect(status().isOk())
-                .andExpect(model().hasErrors())
-                .andExpect(model().attributeExists("trade"))
+                .andExpect(view().name("redirect:/trade/list"))
+                .andExpect(status().is3xxRedirection())  
                 .andReturn().getResponse().containsHeader("Account is mandatory");
     }
 

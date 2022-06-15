@@ -9,8 +9,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -43,8 +43,8 @@ public class BidListControllerTest {
     
     
 
-    @BeforeEach
-    private void addBid() {
+   @Before
+    public void addBid() {
 		bidList.setId(1);
 		bidList.setAccount("test");
 		bidList.setBidQuantity(10d);
@@ -97,7 +97,7 @@ public class BidListControllerTest {
     public void postNewBidWithErrorTest() throws Exception {
         mockMvc.perform(post("/bidList/validate")
                 .param("account", bidList.getAccount())
-                .param("type", bidList.getType())
+              //  .param("type", bidList.getType())
                 .param("bidQuantity", String.valueOf(bidList.getBidQuantity()))
                 .with(csrf()))
                 .andDo(print())
@@ -173,9 +173,10 @@ public class BidListControllerTest {
     @WithMockUser(username="user",roles="ADMIN")
     public void postBidToUpdateWithErrorTest() throws Exception {
 		
+		
         mockMvc.perform(post("/bidList/update/1")
                 .param("account", bidList.getAccount())
-                .param("type", bidList.getType())
+              //  .param("type", bidList.getType())
                 .param("bidQuantity", String.valueOf(bidList.getBidQuantity()))
                 .with(csrf()))
                 .andDo(print())

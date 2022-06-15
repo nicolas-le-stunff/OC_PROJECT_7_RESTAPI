@@ -9,8 +9,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -43,8 +43,8 @@ public class CurvePointControllerTest {
     
     
 
-    @BeforeEach
-    private void addCurve() {
+    @Before
+    public void addCurve() {
 		curvePoint.setId(1);
 		curvePoint.setCurveId(2);
 		curvePoint.setTerm(3);
@@ -97,12 +97,12 @@ public class CurvePointControllerTest {
     public void postCurvePointWithErrorTest() throws Exception {
         mockMvc.perform(post("/curvePoint/validate")
                 .param("curveId", String.valueOf(curvePoint.getCurveId()))
-                .param("term", String.valueOf(curvePoint.getTerm()))
+          //      .param("term", String.valueOf(curvePoint.getTerm()))
                 .param("value", String.valueOf(curvePoint.getValue()))
                 .with(csrf()))
                 .andDo(print())
-                .andExpect(view().name("curvePoint/add"))
-                .andExpect(status().is2xxSuccessful());
+                .andExpect(view().name("redirect:/curvePoint/list"))
+                .andExpect(status().is3xxRedirection());
             
     }
 
@@ -174,14 +174,12 @@ public class CurvePointControllerTest {
 		
         mockMvc.perform(post("/curvePoint/update/1")
                 .param("curveId", String.valueOf(curvePoint.getCurveId()))
-                .param("term", String.valueOf(curvePoint.getTerm()))
+         //       .param("term", String.valueOf(curvePoint.getTerm()))
                 .param("value", String.valueOf(curvePoint.getValue()))
                 .with(csrf()))
                 .andDo(print())
-                .andExpect(view().name("curvePoint/update"))
-                .andExpect(status().isOk())
-                .andExpect(model().hasErrors())
-                .andExpect(model().attributeExists("curvePoint"))
+                .andExpect(view().name("redirect:/curvePoint/list"))
+                .andExpect(status().is3xxRedirection())
                 .andReturn().getResponse().containsHeader("Account is mandatory");
     }
 

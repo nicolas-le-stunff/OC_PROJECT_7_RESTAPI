@@ -29,7 +29,6 @@ public class UserServiceTest {
 		user.setFullname("fullName_test");
 		user.setId(1);
 		user.setPassword("password_test");
-		user.setRole("role_test");
 		user.setUsername("username_test");
 		Mockito.when(userRepository.existsByUsername(user.getUsername())).thenReturn(false);
 		userService.createUser(user);
