@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 @Service
 public class UserService {
-
+	
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -35,7 +35,7 @@ public class UserService {
 		
 	}
 	
-	private PasswordEncoder passwordEncoder() {
+	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();	
 	}
 }
