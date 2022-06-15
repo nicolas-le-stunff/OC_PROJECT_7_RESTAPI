@@ -1,7 +1,6 @@
 package com.nnk.springboot.domain;
 
 import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,7 +9,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nnk.springboot.repositories.UserRepository;
-
 
 
 public class CustomUserDetails implements UserDetails {
@@ -27,7 +25,7 @@ public class CustomUserDetails implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+        return null;
 	}
 
 	@Override
@@ -39,7 +37,12 @@ public class CustomUserDetails implements UserDetails {
 	public String getUsername() {
 		return user.getUsername();
 	}
-
+	
+	public String getRole() {
+		return user.getRole();
+	}
+	
+	 
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;

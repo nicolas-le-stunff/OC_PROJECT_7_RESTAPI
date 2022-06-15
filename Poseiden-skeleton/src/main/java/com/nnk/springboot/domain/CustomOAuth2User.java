@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 public class CustomOAuth2User implements OAuth2User {
  
     private OAuth2User oauth2User;
-     
+   
     public CustomOAuth2User(OAuth2User oauth2User) {
         this.oauth2User = oauth2User;
     }
