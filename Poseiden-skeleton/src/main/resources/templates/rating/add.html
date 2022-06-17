@@ -52,8 +52,8 @@
 			<div class="row">
 				<div class="form-group col-xs-6">
 					<label>Order Number</label>
-					<input
-							type="number" th:field="*{orderNumber}" class="form-control" id="orderNumberInput"
+					<input type="number" step="1" 
+					th:field="*{orderNumber}" class="form-control" id="orderNumberInput"
 							aria-describedby="orderNumberHelp" placeholder="Order Number">
 					<p th:if="${#fields.hasErrors('orderNumber')}" class="label label-danger" th:errors="*{orderNumber}"></p>
 				</div>
