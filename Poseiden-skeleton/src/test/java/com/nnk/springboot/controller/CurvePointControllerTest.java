@@ -96,13 +96,13 @@ public class CurvePointControllerTest {
     @WithMockUser(username="user",roles="ADMIN")
     public void postCurvePointWithErrorTest() throws Exception {
         mockMvc.perform(post("/curvePoint/validate")
-                .param("curveId", String.valueOf(curvePoint.getCurveId()))
+           //     .param("curveId", String.valueOf(curvePoint.getCurveId()))
           //      .param("term", String.valueOf(curvePoint.getTerm()))
                 .param("value", String.valueOf(curvePoint.getValue()))
                 .with(csrf()))
                 .andDo(print())
-                .andExpect(view().name("redirect:/curvePoint/list"))
-                .andExpect(status().is3xxRedirection());
+                .andExpect(view().name("curvePoint/add"))
+                .andExpect(status().is2xxSuccessful());
             
     }
 
@@ -173,13 +173,13 @@ public class CurvePointControllerTest {
     public void postCurvePointUpdateWithErrorTest() throws Exception {
 		
         mockMvc.perform(post("/curvePoint/update/1")
-                .param("curveId", String.valueOf(curvePoint.getCurveId()))
+         //       .param("curveId", String.valueOf(curvePoint.getCurveId()))
          //       .param("term", String.valueOf(curvePoint.getTerm()))
                 .param("value", String.valueOf(curvePoint.getValue()))
                 .with(csrf()))
                 .andDo(print())
-                .andExpect(view().name("redirect:/curvePoint/list"))
-                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("curvePoint/update"))
+                .andExpect(status().is2xxSuccessful())
                 .andReturn().getResponse().containsHeader("Account is mandatory");
     }
 

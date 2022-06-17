@@ -44,6 +44,12 @@ public class BidListServiceTests {
 	}
 	
 	@Test
+	public void creatBidList() {
+	
+	}
+	
+	
+	@Test
 	public void createBidListTest() {
 		Mockito.verify(bidListRepository,Mockito.times(0)).save(any());
 

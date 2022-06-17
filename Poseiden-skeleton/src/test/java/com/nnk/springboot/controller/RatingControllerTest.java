@@ -101,11 +101,10 @@ public class RatingControllerTest {
                 .param("orderNumber", String.valueOf(rating.getOrderNumber()))
                 .param("sandpRating", String.valueOf(rating.getSandpRating()))
                 .param("moodysRating", String.valueOf(rating.getMoodysRating()))
-                .param("fitchRating", String.valueOf(rating.getFitchRating()))
                 .with(csrf()))
                 .andDo(print())
-                .andExpect(view().name("redirect:/rating/list"))
-                .andExpect(status().is3xxRedirection());
+                .andExpect(view().name("rating/add"))
+                .andExpect(status().is2xxSuccessful());
             
     }
 
@@ -134,8 +133,6 @@ public class RatingControllerTest {
     	rating.setSandpRating("3");
     	rating.setMoodysRating("4");
 		
-		
-
 		when(ratingService.getRatingById(5)).thenThrow(new NotFoundException("rating Id : "+5+" not exist"));
 		
         mockMvc.perform(get("/rating/update/5")
@@ -179,14 +176,13 @@ public class RatingControllerTest {
         mockMvc.perform(post("/rating/update/1")
                 .param("orderNumber", String.valueOf(rating.getOrderNumber()))
                 .param("sandpRating", String.valueOf(rating.getSandpRating()))
-                .param("moodysRating", String.valueOf(rating.getMoodysRating()))
+           //     .param("moodysRating", String.valueOf(rating.getMoodysRating()))
                 .param("fitchRating", String.valueOf(rating.getFitchRating()))
                 .with(csrf()))
                 .andDo(print())
-                .andExpect(view().name("redirect:/rating/list"))
+                .andExpect(view().name("redirect:/rating/update"))
                 .andExpect(status().is3xxRedirection());
-     
-            
+
     }
 
 

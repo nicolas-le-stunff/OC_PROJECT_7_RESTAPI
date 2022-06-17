@@ -99,10 +99,9 @@ public class RuleNameControllerTest {
       
     }
 
-  /*  @Test
+    @Test
     @WithMockUser(username="user",roles="ADMIN")
-    public void postCurvePointWithErrorTest() throws Exception {
-    	//TODO result.hasError??
+    public void postRuleNameWithErrorTest() throws Exception {
         mockMvc.perform(post("/ruleName/validate")
                 .param("sqlPart", "SqlPart")
                 .with(csrf()))
@@ -110,7 +109,7 @@ public class RuleNameControllerTest {
                 .andExpect(view().name("ruleName/add"))
                 .andExpect(status().is2xxSuccessful());
             
-    }*/
+    }
 
     @Test
     @WithMockUser(username="user",roles="ADMIN")
@@ -121,7 +120,6 @@ public class RuleNameControllerTest {
 		ruleName.setSqlStr("SqlStr");
 		ruleName.setTemplate("Template");
 		ruleName.setJson("Json");
-		
 		
 		when(ruleNameService.getRuleNameById(1)).thenReturn(ruleName);
 
@@ -185,15 +183,15 @@ public class RuleNameControllerTest {
 
  
 
-/*	@Test
+	@Test
     @WithMockUser(username="user",roles="ADMIN")
     public void postRuleNameUpdateWithErrorTest() throws Exception {
-		//TODO result.hasError??
+		
         mockMvc.perform(post("/ruleName/update/1")
                 .param("name","")
                 .param("description", "description")
                 .param("json", "Json")
-                .param("template", "Template")
+             //   .param("template", "Template")
                 .param("sqlStr", "SqlStr")
                 .param("sqlPart", "SqlPart")
                 .with(csrf()))
@@ -203,7 +201,7 @@ public class RuleNameControllerTest {
                 .andExpect(model().hasErrors())
                 .andExpect(model().attributeExists("ruleName"))
                 .andReturn().getResponse().containsHeader("Account is mandatory");
-    }*/
+    }
 
 
 

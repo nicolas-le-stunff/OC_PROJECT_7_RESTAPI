@@ -94,13 +94,13 @@ public class TradeControllerTest {
     @WithMockUser(username="user",roles="ADMIN")
     public void postTradeWithErrorTest() throws Exception {
         mockMvc.perform(post("/trade/validate")
-                .param("account", trade.getAccount())
+           //     .param("account", trade.getAccount())
                 .param("type", trade.getType())
                 .param("buyQuantity", String.valueOf(trade.getBuyQuantity()))
                 .with(csrf()))
                 .andDo(print())
-                .andExpect(view().name("redirect:/trade/list"))
-                .andExpect(status().is3xxRedirection());
+                .andExpect(view().name("trade/add"))
+                .andExpect(status().is2xxSuccessful());
             
     }
 
@@ -167,13 +167,13 @@ public class TradeControllerTest {
     public void postTradeUpdateWithErrorTest() throws Exception {
 		
         mockMvc.perform(post("/trade/update/1")
-                .param("account", trade.getAccount())
-                .param("type", trade.getType())
+            //    .param("account", trade.getAccount())
+           //     .param("type", trade.getType())
                 .param("buyQuantity", String.valueOf(trade.getBuyQuantity()))
                 .with(csrf()))
                 .andDo(print())
-                .andExpect(view().name("redirect:/trade/list"))
-                .andExpect(status().is3xxRedirection())  
+                .andExpect(view().name("trade/update"))
+                .andExpect(status().is2xxSuccessful())  
                 .andReturn().getResponse().containsHeader("Account is mandatory");
     }
 

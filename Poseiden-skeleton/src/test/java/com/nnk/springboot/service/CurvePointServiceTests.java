@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class CurvePointServiceTests {
 	
 	private CurvePoint curve = new CurvePoint();
 	private CurvePoint curve2 = new CurvePoint();
+	private CurvePoint curve3 = new CurvePoint();
 
 	@Before
 	public void init() {
@@ -47,7 +49,17 @@ public class CurvePointServiceTests {
 		curve2.setCurveId(4);
 		curve2.setTerm(6);
 		curve2.setValue(4);
+		
+		curve3.setId(3);
+		curve3.setCurveId(5);
+		curve3.setTerm(7);
+		curve3.setValue(8);
+		curve3.setAsOfDate(new Timestamp(4));
+		curve3.setCreationDate(new Timestamp(4));
+		
+		
 	}
+	
 	
 
 	@Test
