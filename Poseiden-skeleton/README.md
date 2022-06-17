@@ -5,6 +5,7 @@
 2. Java 8
 3. Thymeleaf
 4. Bootstrap v.4.3.1
+5. Lombok 1.18.10
 
 
 ## Setup with Intellij IDE
