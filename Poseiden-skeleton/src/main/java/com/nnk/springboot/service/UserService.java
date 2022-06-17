@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 
+import javassist.NotFoundException;
+
+import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +37,43 @@ public class UserService {
 		log.error("User already exists : username "+user.getUsername());
 		throw new RuntimeException("User already exists : username "+user.getUsername());
 		
+	}
+	
+	public void deleteUserById(int id) throws NotFoundException {
+		if(userRepository.existsById(id)){
+		
+			userRepository.deleteById(id);
+		
+		}else {
+			throw new NotFoundException("Invalid user Id:" + id);
+		}
+	}
+	
+	public User findOneById(int id) throws NotFoundException {
+		
+		if (userRepository.existsById(id)) {
+			return userRepository.findById(id).get();
+		}else{
+			 throw new NotFoundException("Invalid user Id:" + id);
+		}
+	}
+	
+	public User updateUser(int id,User user) throws NotFoundException {
+		
+		if (userRepository.existsById(id)) {
+			User userRepo = userRepository.findById(id).get();
+			userRepo.setFullname(user.getFullname());
+			userRepo.setRole(user.getRole());
+			userRepo.setPassword(passwordEncoder().encode(user.getPassword()));
+			userRepo.setUsername(user.getUsername());
+			return userRepository.save(userRepo);
+		}
+        log.error("Unable to get user by id : " + id + " because doesn't exist");
+        throw new NotFoundException("User id doesn't exist");
+	}
+	
+	public List<User> findAllUser() {
+		return userRepository.findAll();
 	}
 	
 	public PasswordEncoder passwordEncoder() {

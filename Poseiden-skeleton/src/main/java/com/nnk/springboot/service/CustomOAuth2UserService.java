@@ -29,18 +29,20 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService  {
         
         User userFind = userRepository.findByUsername(username);
 		if (userFind == null) {
-			User newUser = new User();
-			newUser.setFullname(username);
-			newUser.setUsername(username);
-			newUser.setPassword(userService.passwordEncoder().encode(username));
-			
-			userRepository.save(newUser);
+			CreateNewUser(username);
 		}
-        
         
         return new CustomOAuth2User(user);
     }
     
+    
+    private void CreateNewUser(String userName) {
+		User newUser = new User();
+		newUser.setFullname(userName);
+		newUser.setUsername(userName);
+		newUser.setPassword(userService.passwordEncoder().encode(userName));
+		userRepository.save(newUser);
+    }
   
  
 }
