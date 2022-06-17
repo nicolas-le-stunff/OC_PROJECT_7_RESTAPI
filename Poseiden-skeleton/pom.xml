@@ -187,7 +187,9 @@
 				</executions>
 				<configuration>        
         <excludes>
-            <exclude>nnk/springboot/config/*.java</exclude>
+            <exclude>com/nnk/springboot/*.java</exclude>
+            <exclude>com/nnk/springboot/service.java</exclude>
+            <exclude>**/config/**</exclude>
         </excludes>
 				</configuration>
 			</plugin>
