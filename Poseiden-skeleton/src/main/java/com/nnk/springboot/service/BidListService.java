@@ -15,27 +15,43 @@ import javassist.NotFoundException;
 
 @Service
 public class BidListService {
-	
+
 	@Autowired
 	private BidListRepository bidListRepository;
-	
+
 	private Logger log = LoggerFactory.getLogger(BidListService.class);
-	
-	public List<BidList> getAllBistList(){
-		 log.info("Get all bidList");
-		 List<BidList> bidList = bidListRepository.findAll();
-		 return bidList;
+
+	/**
+	 * Get all user
+	 * 
+	 * @return a list of all users
+	 */
+	public List<BidList> getAllBistList() {
+		log.info("Get all bidList");
+		List<BidList> bidList = bidListRepository.findAll();
+		return bidList;
 	}
-	
+
+	/**
+	 * Get bidList by id
+	 * @param id
+	 * @return bidList by id
+	 * @throws NotFoundException
+	 */
 	public BidList getBidListById(Integer id) throws NotFoundException {
-		log.info("Get bidList ID : "+id);
-		if(bidListRepository.existsById(id)) {
+		log.info("Get bidList ID : " + id);
+		if (bidListRepository.existsById(id)) {
 			return bidListRepository.getOne(id);
 		}
-		log.error("bidList Id : "+id+" not exist");
-		throw new NotFoundException("bidList Id : "+id+" not exist");
+		log.error("bidList Id : " + id + " not exist");
+		throw new NotFoundException("bidList Id : " + id + " not exist");
 	}
-	
+
+	/**
+	 * 
+	 * @param bidList
+	 * @return user saved
+	 */
 	public BidList createNewBidList(BidList bidList) {
 		log.info("create a new bidList");
 		BidList newBid = new BidList();
@@ -44,27 +60,38 @@ public class BidListService {
 		newBid.setType(bidList.getType());
 		return bidListRepository.save(newBid);
 	}
-	
-	
+
+	/**
+	 * Delete bidList by ID
+	 * 
+	 * @param id
+	 */
 	@Transactional
 	public void deleteBidList(Integer id) {
-		log.info("Delete BidList id : "+ id);
+		log.info("Delete BidList id : " + id);
 		bidListRepository.deleteById(id);
 	}
-	
-	
+
+	/**
+	 * update bidList by id
+	 * 
+	 * @param id
+	 * @param bidlist
+	 * @return BidList update
+	 * @throws NotFoundException
+	 */
 	@Transactional
 	public BidList updateBidList(Integer id, BidList bidlist) throws NotFoundException {
-		log.info("Update bidList id : "+id);
-		if(bidListRepository.existsById(id)) {
+		log.info("Update bidList id : " + id);
+		if (bidListRepository.existsById(id)) {
 			BidList bidListUpdated = bidListRepository.getOne(id);
 			bidListUpdated.setAccount(bidlist.getAccount());
 			bidListUpdated.setType(bidlist.getType());
 			bidListUpdated.setBidQuantity(bidlist.getBidQuantity());
 			return bidListRepository.save(bidListUpdated);
-			}
-		log.error("bidList Id : "+id+" not exist");
-		throw new NotFoundException("bidList Id : "+id+" not exist");
+		}
+		log.error("bidList Id : " + id + " not exist");
+		throw new NotFoundException("bidList Id : " + id + " not exist");
 	}
 
 }

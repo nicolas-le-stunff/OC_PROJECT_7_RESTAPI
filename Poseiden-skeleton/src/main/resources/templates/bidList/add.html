@@ -14,7 +14,9 @@
 		</div>
 
 		<div class="row">
-			<form action="#" th:action="@{/bidList/validate}"th:object="${bidList}" method="post" class="form-horizontal"style="width: 100%">
+			<form action="#" th:action="@{/bidList/validate}"
+				th:object="${bidList}" method="post" class="form-horizontal"
+				style="width: 100%">
 
 				<div class="alert alert-danger"
 					th:if="${#fields.hasErrors('global')}">
@@ -43,8 +45,7 @@
 
 				<div class="row">
 					<div class="form-group col-xs-6">
-						<label>Bid quantity</label> 
-						<input type="number" step="0.01"
+						<label>Bid quantity</label> <input type="number" step="0.01"
 							th:field="*{bidQuantity}" class="form-control"
 							id="bidQuantityBidListInput"
 							aria-describedby="bidQuantityBidListHelp"

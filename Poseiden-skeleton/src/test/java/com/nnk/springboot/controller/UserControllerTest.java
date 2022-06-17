@@ -34,29 +34,29 @@ import javassist.NotFoundException;
 @WebMvcTest(UserController.class)
 @AutoConfigureMockMvc(addFilters = false)
 public class UserControllerTest {
-	
-    @Autowired
-    private MockMvc mockMvc;
-    
-    @MockBean
-    private UserRepository userRepository;
-    
-    @Mock
-    private CustomUserDetailsService customUserDetailsService;
-    
-    @MockBean
-    private UserService userService;
 
-   /* @Test
-   
-   public void UserList() throws Exception {
-    	Mockito.when(userRepository.existsById(1)).thenReturn(true);
-        mockMvc.perform(get("/user/list"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("user/List"));
-    }*/
-    private User user = new User();
+	@Autowired
+	private MockMvc mockMvc;
+
+	@MockBean
+	private UserRepository userRepository;
+
+	@Mock
+	private CustomUserDetailsService customUserDetailsService;
+
+	@MockBean
+	private UserService userService;
+
+	/*
+	 * @Test
+	 * 
+	 * public void UserList() throws Exception {
+	 * Mockito.when(userRepository.existsById(1)).thenReturn(true);
+	 * mockMvc.perform(get("/user/list")) .andDo(print())
+	 * .andExpect(status().isOk()) .andExpect(view().name("user/List")); }
+	 */
+	private User user = new User();
+
 	@Before
 	public void init() {
 
@@ -64,57 +64,42 @@ public class UserControllerTest {
 		user.setId(1);
 		user.setPassword("password_test");
 		user.setUsername("username_test");
-		
-	}
-    
-    @Test
-    public void userValidate() throws Exception {
-    	Mockito.when(userService.createUser(any())).thenReturn(user);
-    	
-    	mockMvc.perform(post("/user/validate")
-    			.param("fullname", "ok")
-    			.param("username","okok")
-    			.param("role", "role")
-    			.param("id","1"))
-    	.andDo(print())
-    	.andExpect(view().name("redirect:/user/list"))
-    	.andExpect(status().is3xxRedirection());
-    }
-    
-    @Test
-    public void userGetUpdateTest() throws Exception {
-    	Mockito.when(userService.findOneById(1)).thenReturn(user);
-    	
-    	mockMvc.perform(get("/user/update/1"))
-    	.andDo(print())
-    	.andExpect(view().name("user/update"))
-    	.andExpect(status().is2xxSuccessful());
-    }
-    @Test
-    public void userUpdateTest() throws Exception {
-    	mockMvc.perform(post("/user/update/1"))
-    	.andDo(print())
-    	.andExpect(view().name("redirect:/user/list"))
-    	.andExpect(status().is3xxRedirection());
-    }
-    
-    
-    @Test
-    public void userAddTest() throws Exception {
-        mockMvc
-        .perform(get("/user/add"))
-                .andDo(print())
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(view().name("user/add"));
-    }
-    @Test
-    public void userDeleteTest() throws Exception {
-    	mockMvc
-    	.perform(get("/user/delete/1"))
-    	.andDo(print())
-    	.andExpect(status().is3xxRedirection())
-    	.andExpect(view().name("redirect:/user/list"));
-    }
 
-    
+	}
+
+	@Test
+	public void userValidate() throws Exception {
+		Mockito.when(userService.createUser(any())).thenReturn(user);
+
+		mockMvc.perform(post("/user/validate").param("fullname", "ok").param("username", "okok").param("role", "role")
+				.param("id", "1")).andDo(print()).andExpect(view().name("redirect:/user/list"))
+				.andExpect(status().is3xxRedirection());
+	}
+
+	@Test
+	public void userGetUpdateTest() throws Exception {
+		Mockito.when(userService.findOneById(1)).thenReturn(user);
+
+		mockMvc.perform(get("/user/update/1")).andDo(print()).andExpect(view().name("user/update"))
+				.andExpect(status().is2xxSuccessful());
+	}
+
+	@Test
+	public void userUpdateTest() throws Exception {
+		mockMvc.perform(post("/user/update/1")).andDo(print()).andExpect(view().name("redirect:/user/list"))
+				.andExpect(status().is3xxRedirection());
+	}
+
+	@Test
+	public void userAddTest() throws Exception {
+		mockMvc.perform(get("/user/add")).andDo(print()).andExpect(status().is2xxSuccessful())
+				.andExpect(view().name("user/add"));
+	}
+
+	@Test
+	public void userDeleteTest() throws Exception {
+		mockMvc.perform(get("/user/delete/1")).andDo(print()).andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/user/list"));
+	}
+
 }

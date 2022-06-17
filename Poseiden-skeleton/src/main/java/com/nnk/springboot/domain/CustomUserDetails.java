@@ -25,7 +25,7 @@ public class CustomUserDetails implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+		return null;
 	}
 
 	@Override
@@ -37,12 +37,11 @@ public class CustomUserDetails implements UserDetails {
 	public String getUsername() {
 		return user.getUsername();
 	}
-	
+
 	public String getRole() {
 		return user.getRole();
 	}
-	
-	 
+
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
@@ -70,7 +69,8 @@ public class CustomUserDetails implements UserDetails {
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) {
 		User user = userRepository.findByUsername(username);
-		if (user == null) throw new UsernameNotFoundException(username);
+		if (user == null)
+			throw new UsernameNotFoundException(username);
 
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), null);
 	}

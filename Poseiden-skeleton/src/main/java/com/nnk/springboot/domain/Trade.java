@@ -4,61 +4,58 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.sql.Timestamp;
 
-//@Getter
-//@Setter
+
 @Data
 @Entity
 @Table(name = "trade")
 public class Trade {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "trade_id")
-    private Integer tradeId;
-    
-    @NotBlank(message = "account is mandatory")
-    private String account;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "trade_id")
+	private Integer tradeId;
 
-    private String type;
+	@NotBlank(message = "account is mandatory")
+	private String account;
 
-    private Double buyQuantity;
+	private String type;
 
-    private Double sellQuantity;
+	private Double buyQuantity;
 
-    private Double buyPrice;
+	private Double sellQuantity;
 
-    private Double sellPrice;
+	private Double buyPrice;
 
-    private String benchmark;
+	private Double sellPrice;
 
-    private Timestamp tradeDate;
+	private String benchmark;
 
-    private String security;
+	private Timestamp tradeDate;
 
-    private String status;
+	private String security;
 
-    private String trader;
+	private String status;
 
-    private String book;
+	private String trader;
 
-    private String creationName;
+	private String book;
 
-    private Timestamp creationDate;
+	private String creationName;
 
-    private String revisionName;
+	private Timestamp creationDate;
 
-    private Timestamp revisionDate;
+	private String revisionName;
 
-    private String dealName;
+	private Timestamp revisionDate;
 
-    private String dealType;
+	private String dealName;
 
-    private String sourceListId;
+	private String dealType;
 
-    private String side;
-    
+	private String sourceListId;
+
+	private String side;
+
 }

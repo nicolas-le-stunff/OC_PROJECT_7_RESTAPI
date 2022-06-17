@@ -5,62 +5,58 @@ import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-//@Getter
-//@Setter
 @Data
 @Entity
 @Table(name = "bidlist")
 public class BidList {
 
-	  @Id
-	  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	  private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-	  @NotBlank(message = "Account is mandatory")
-	  private String account;
-	  
-	  @NotBlank(message = "Type is mandatory")
-	  private String type;
+	@NotBlank(message = "Account is mandatory")
+	private String account;
 
-	  private double bidQuantity;
+	@NotBlank(message = "Type is mandatory")
+	private String type;
 
-	  private double askQuantity;
+	private double bidQuantity;
 
-	  private double bid;
+	private double askQuantity;
 
-	  private double ask;
+	private double bid;
 
-	  private String benchmark;
+	private double ask;
 
-	  private Timestamp bidListDate;
+	private String benchmark;
 
-	  private String commentary;
+	private Timestamp bidListDate;
 
-	  private String security;
+	private String commentary;
 
-	  private String status;
+	private String security;
 
-	  private String trader;
+	private String status;
 
-	  private String book;
+	private String trader;
 
-	  private String creationName;
+	private String book;
 
-	  private Timestamp creationDate;
+	private String creationName;
 
-	  private String revisionName;
+	private Timestamp creationDate;
 
-	  private Timestamp revisionDate;
+	private String revisionName;
 
-	  private String dealName;
+	private Timestamp revisionDate;
 
-	  private String dealType;
+	private String dealName;
 
-	  private String sourceId;
+	private String dealType;
 
-	  private String side;
+	private String sourceId;
+
+	private String side;
 
 }

@@ -1,95 +1,100 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8"/>
+<meta charset="utf-8" />
 <title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
+	<div class="container">
 
-	<div class="row">
-		<h2>Add New Rule</h2>
-	</div>
+		<div class="row">
+			<h2>Add New Rule</h2>
+		</div>
 
-	<div class="row">
-		<form action="#" th:action="@{/ruleName/validate}" th:object="${ruleName}" method="post" class="form-horizontal" style="width: 100%">
-		
-			<div class="alert alert-danger" th:if="${#fields.hasErrors('global')}">
-				<p th:errors="*{global}"></p>
-			</div>
+		<div class="row">
+			<form action="#" th:action="@{/ruleName/validate}"
+				th:object="${ruleName}" method="post" class="form-horizontal"
+				style="width: 100%">
 
-			<div class="row">
-				<div class="form-group col-xs-6">
-					<label>Name</label>
-					<input
-							type="text" th:field="*{name}" class="form-control" id="nameInput"
-							aria-describedby="nameHelp" placeholder="Rule Name">
-					<p th:if="${#fields.hasErrors('name')}" class="label label-danger" th:errors="*{name}"></p>
+				<div class="alert alert-danger"
+					th:if="${#fields.hasErrors('global')}">
+					<p th:errors="*{global}"></p>
 				</div>
-			</div>
 
-			<div class="row">
-				<div class="form-group col-xs-6">
-					<label>Description</label>
-					<input
-							type="text" th:field="*{description}" class="form-control" id="descriptionInput"
-							aria-describedby="descriptionHelp" placeholder="Rule Description">
-					<p th:if="${#fields.hasErrors('description')}" class="label label-danger" th:errors="*{description}"></p>
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<label>Name</label> <input type="text" th:field="*{name}"
+							class="form-control" id="nameInput" aria-describedby="nameHelp"
+							placeholder="Rule Name">
+						<p th:if="${#fields.hasErrors('name')}" class="label label-danger"
+							th:errors="*{name}"></p>
+					</div>
 				</div>
-			</div>
 
-			<div class="row">
-				<div class="form-group col-xs-6">
-					<label>Json</label>
-					<input
-							type="text" th:field="*{json}" class="form-control" id="jsonInput"
-							aria-describedby="jsonHelp" placeholder="Rule Json">
-					<p th:if="${#fields.hasErrors('json')}" class="label label-danger" th:errors="*{json}"></p>
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<label>Description</label> <input type="text"
+							th:field="*{description}" class="form-control"
+							id="descriptionInput" aria-describedby="descriptionHelp"
+							placeholder="Rule Description">
+						<p th:if="${#fields.hasErrors('description')}"
+							class="label label-danger" th:errors="*{description}"></p>
+					</div>
 				</div>
-			</div>
 
-			<div class="row">
-				<div class="form-group col-xs-6">
-					<label>Template</label>
-					<input
-							type="text" th:field="*{template}" class="form-control" id="templateInput"
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<label>Json</label> <input type="text" th:field="*{json}"
+							class="form-control" id="jsonInput" aria-describedby="jsonHelp"
+							placeholder="Rule Json">
+						<p th:if="${#fields.hasErrors('json')}" class="label label-danger"
+							th:errors="*{json}"></p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<label>Template</label> <input type="text" th:field="*{template}"
+							class="form-control" id="templateInput"
 							aria-describedby="templateHelp" placeholder="Rule Template">
-					<p th:if="${#fields.hasErrors('template')}" class="label label-danger" th:errors="*{template}"></p>
+						<p th:if="${#fields.hasErrors('template')}"
+							class="label label-danger" th:errors="*{template}"></p>
+					</div>
 				</div>
-			</div>
 
-			<div class="row">
-				<div class="form-group col-xs-6">
-					<label>SQL Str</label>
-					<input
-							type="text" th:field="*{sqlStr}" class="form-control" id="sqlStrInput"
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<label>SQL Str</label> <input type="text" th:field="*{sqlStr}"
+							class="form-control" id="sqlStrInput"
 							aria-describedby="sqlStrHelp" placeholder="Rule SQL Str">
-					<p th:if="${#fields.hasErrors('sqlStr')}" class="label label-danger" th:errors="*{sqlStr}"></p>
+						<p th:if="${#fields.hasErrors('sqlStr')}"
+							class="label label-danger" th:errors="*{sqlStr}"></p>
+					</div>
 				</div>
-			</div>
 
-			<div class="row">
-				<div class="form-group col-xs-6">
-					<label>SQL Part</label>
-					<input
-							type="text" th:field="*{sqlPart}" class="form-control" id="sqlPartInput"
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<label>SQL Part</label> <input type="text" th:field="*{sqlPart}"
+							class="form-control" id="sqlPartInput"
 							aria-describedby="sqlPartHelp" placeholder="Rule SQL Part">
-					<p th:if="${#fields.hasErrors('sqlPart')}" class="label label-danger" th:errors="*{sqlPart}"></p>
+						<p th:if="${#fields.hasErrors('sqlPart')}"
+							class="label label-danger" th:errors="*{sqlPart}"></p>
+					</div>
 				</div>
-			</div>
 
-			<div class="row">
-				<div class="form-group col-xs-6">
-					<a class="btn btn-danger" href="/ruleName/list" role="button">Cancel</a>
-					<button type="submit" class="btn btn-primary">Add RuleName</button>
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<a class="btn btn-danger" href="/ruleName/list" role="button">Cancel</a>
+						<button type="submit" class="btn btn-primary">Add
+							RuleName</button>
+					</div>
 				</div>
-			</div>
 
-		</form>
+			</form>
+		</div>
+
 	</div>
-
-</div>
 </body>
 </html>

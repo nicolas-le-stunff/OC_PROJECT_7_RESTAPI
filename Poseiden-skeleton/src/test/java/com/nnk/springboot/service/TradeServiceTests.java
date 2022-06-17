@@ -28,16 +28,16 @@ public class TradeServiceTests {
 
 	@InjectMocks
 	private TradeService tradeService;
-	
+
 	private Trade trade = new Trade();
 	private Trade trade2 = new Trade();
-	
+
 	@Before
 	public void init() {
 		trade.setBenchmark("BenchmarkTest");
 		trade.setAccount("AccountTest");
 		trade.setBuyQuantity(1.0);
-		
+
 		trade2.setBenchmark("BenchmarkTest1");
 		trade2.setAccount("AccountTest1");
 		trade2.setBuyQuantity(1.0);
@@ -54,9 +54,8 @@ public class TradeServiceTests {
 	}
 
 	@Test
-	public void updateTradeTest()throws NotFoundException {
+	public void updateTradeTest() throws NotFoundException {
 		Mockito.when(tradeRepository.existsById(1)).thenReturn(true);
-
 
 		Mockito.when(tradeRepository.getOne(1)).thenReturn(trade);
 
@@ -65,7 +64,6 @@ public class TradeServiceTests {
 		tradeUpdate.setAccount("AccountUpdate");
 		tradeUpdate.setBuyQuantity(1.0);
 
-
 		tradeService.updateTrade(1, tradeUpdate);
 		Trade tradeTest = tradeService.getTradeById(1);
 
@@ -73,9 +71,8 @@ public class TradeServiceTests {
 	}
 
 	@Test(expected = NotFoundException.class)
-	public void updateTradeTestThrowError()throws NotFoundException {
+	public void updateTradeTestThrowError() throws NotFoundException {
 		Mockito.when(tradeRepository.existsById(1)).thenReturn(true);
-
 
 		Mockito.when(tradeRepository.getOne(1)).thenReturn(trade);
 
@@ -87,10 +84,8 @@ public class TradeServiceTests {
 		tradeService.updateTrade(5, tradeUpdate);
 	}
 
-	
 	@Test
 	public void getAllTradeTest() {
-
 
 		List<Trade> tradeList = new ArrayList<>();
 		tradeList.add(trade);
@@ -112,31 +107,30 @@ public class TradeServiceTests {
 		tradeService.createTrade(trade);
 
 		Mockito.verify(tradeRepository, Mockito.times(1)).save(any());
-		
+
 		tradeService.deleteTrade(1);
-		
-		Mockito.verify(tradeRepository,Mockito.times(1)).deleteById(any());
-		
+
+		Mockito.verify(tradeRepository, Mockito.times(1)).deleteById(any());
+
 	}
-	
+
 	@Test
 	public void getTradeByIdTest() throws NotFoundException {
 		Mockito.when(tradeRepository.existsById(1)).thenReturn(true);
 
-
 		Mockito.when(tradeRepository.getOne(1)).thenReturn(trade);
-		
+
 		tradeService.createTrade(trade);
 		Trade tra = tradeService.getTradeById(1);
 
 		assertEquals(tra, trade);
-		
+
 	}
-	
+
 	@Test(expected = NotFoundException.class)
 	public void getTradeByIdNotExistTest() throws NotFoundException {
-		
+
 		assertEquals(tradeService.getTradeById(1), 0);
-		
+
 	}
 }

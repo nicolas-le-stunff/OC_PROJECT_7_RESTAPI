@@ -35,7 +35,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService  {
         return new CustomOAuth2User(user);
     }
     
-    
+    /**
+     * Create user if Oauth user not exists in bdd
+     * @param userName
+     */
     private void CreateNewUser(String userName) {
 		User newUser = new User();
 		newUser.setFullname(userName);

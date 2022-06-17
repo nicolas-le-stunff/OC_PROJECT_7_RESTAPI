@@ -24,7 +24,11 @@ public class CurvePointService {
 	private Logger log = LoggerFactory.getLogger(CurvePointService.class);
 	
 	
-	
+	/**
+	 * Create a new CurvePoint
+	 * @param curvePoint
+	 * @return
+	 */
 	public CurvePoint createCurvePoint(CurvePoint curvePoint) {
 		log.info("Create new Curve Point");
 		CurvePoint newcurvePoint = new CurvePoint();
@@ -35,17 +39,32 @@ public class CurvePointService {
 	
 	}
 	
+	/**
+	 * Get all CurvePoint
+	 * @return list of all CurvePoint
+	 */
 	public List<CurvePoint> getAllCurvePoint(){
 		log.info("Get all Curve point");
 		return curveRepository.findAll(); 
 	}
 	
+	
+	/**
+	 * Delete CurvePoint by ID
+	 * @param id
+	 */
 	@Transactional
 	public void deleteCurvePoint (Integer id) {
 		log.info("Delete curve point : "+id);
 		curveRepository.deleteById(id);
 	}
 	
+	/**
+	 * Get CurvePoint by ID
+	 * @param id
+	 * @return
+	 * @throws NotFoundException
+	 */
 	public CurvePoint getCurvePointById(Integer id) throws NotFoundException {
 		log.info("Get curvePoint ID : "+id);
 		if(curveRepository.existsById(id)) {
@@ -55,6 +74,13 @@ public class CurvePointService {
 		throw new NotFoundException("curvePoint Id : "+id+" not exist");
 	}
 
+	/**
+	 * Update curvePoint
+	 * @param id
+	 * @param curvePoint
+	 * @return
+	 * @throws NotFoundException
+	 */
 	@Transactional
 	public @Valid CurvePoint updateCurvePoint(Integer id, @Valid CurvePoint curvePoint) throws NotFoundException {
 		log.info("Get a curvePoint by ID");

@@ -1,74 +1,81 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8"/>
+<meta charset="utf-8" />
 <title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
+	<div class="container">
 
-	<div class="row">
-		<h2>Add New Rating</h2>
+		<div class="row">
+			<h2>Add New Rating</h2>
+		</div>
+
+		<div class="row">
+			<form action="#" th:action="@{/rating/validate}"
+				th:object="${rating}" method="post" class="form-horizontal"
+				style="width: 100%">
+				<div class="alert alert-danger"
+					th:if="${#fields.hasErrors('global')}">
+					<p th:errors="*{global}"></p>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<label>Moodys Rating</label> <input type="text"
+							th:field="*{moodysRating}" class="form-control"
+							id="moodysRatingInput" aria-describedby="moodysRatingHelp"
+							placeholder="Moodys Rating">
+						<p th:if="${#fields.hasErrors('moodysRating')}"
+							class="label label-danger" th:errors="*{moodysRating}"></p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<label>Sandp Rating</label> <input type="text"
+							th:field="*{sandpRating}" class="form-control"
+							id="sandpRatingInput" aria-describedby="sandpRatingHelp"
+							placeholder="Sandp Rating">
+						<p th:if="${#fields.hasErrors('sandpRating')}"
+							class="label label-danger" th:errors="*{sandpRating}"></p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<label>Fitch Rating</label> <input type="text"
+							th:field="*{fitchRating}" class="form-control"
+							id="fitchRatingInput" aria-describedby="fitchRatingHelp"
+							placeholder="Fitch Rating">
+						<p th:if="${#fields.hasErrors('fitchRating')}"
+							class="label label-danger" th:errors="*{fitchRating}"></p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<label>Order Number</label> <input type="number" step="1"
+							th:field="*{orderNumber}" class="form-control"
+							id="orderNumberInput" aria-describedby="orderNumberHelp"
+							placeholder="Order Number">
+						<p th:if="${#fields.hasErrors('orderNumber')}"
+							class="label label-danger" th:errors="*{orderNumber}"></p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<a class="btn btn-danger" href="/rating/list" role="button">Cancel</a>
+						<button type="submit" class="btn btn-primary">Add Rating</button>
+					</div>
+				</div>
+
+			</form>
+		</div>
+
 	</div>
-
-	<div class="row">
-		<form action="#" th:action="@{/rating/validate}" th:object="${rating}" method="post" class="form-horizontal" style="width: 100%">
-			<div class="alert alert-danger" th:if="${#fields.hasErrors('global')}">
-				<p th:errors="*{global}"></p>
-			</div>
-
-			<div class="row">
-				<div class="form-group col-xs-6">
-					<label>Moodys Rating</label>
-					<input
-							type="text" th:field="*{moodysRating}" class="form-control" id="moodysRatingInput"
-							aria-describedby="moodysRatingHelp" placeholder="Moodys Rating">
-					<p th:if="${#fields.hasErrors('moodysRating')}" class="label label-danger" th:errors="*{moodysRating}"></p>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="form-group col-xs-6">
-					<label>Sandp Rating</label>
-					<input
-							type="text" th:field="*{sandpRating}" class="form-control" id="sandpRatingInput"
-							aria-describedby="sandpRatingHelp" placeholder="Sandp Rating">
-					<p th:if="${#fields.hasErrors('sandpRating')}" class="label label-danger" th:errors="*{sandpRating}"></p>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="form-group col-xs-6">
-					<label>Fitch Rating</label>
-					<input
-							type="text" th:field="*{fitchRating}" class="form-control" id="fitchRatingInput"
-							aria-describedby="fitchRatingHelp" placeholder="Fitch Rating">
-					<p th:if="${#fields.hasErrors('fitchRating')}" class="label label-danger" th:errors="*{fitchRating}"></p>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="form-group col-xs-6">
-					<label>Order Number</label>
-					<input type="number" step="1" 
-					th:field="*{orderNumber}" class="form-control" id="orderNumberInput"
-							aria-describedby="orderNumberHelp" placeholder="Order Number">
-					<p th:if="${#fields.hasErrors('orderNumber')}" class="label label-danger" th:errors="*{orderNumber}"></p>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="form-group col-xs-6">
-					<a class="btn btn-danger" href="/rating/list" role="button">Cancel</a>
-					<button type="submit" class="btn btn-primary">Add Rating</button>
-				</div>
-			</div>
-
-		</form>
-	</div>
-
-</div>
 </body>
 </html>

@@ -4,32 +4,25 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.sql.Timestamp;
-
-
-//@Getter
-//@Setter
 @Data
 @Entity
 @Table(name = "rulename")
 public class RuleName {
-	  @Id
-	  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	  private Integer id;
-	  
-	  @NotBlank(message = "Name is mandatory") 
-	  private String name;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-	  private String description;
+	@NotBlank(message = "Name is mandatory")
+	private String name;
 
-	  private String json;
+	private String description;
 
-	  private String template;
+	private String json;
 
-	  private String sqlStr;
+	private String template;
 
-	  private String sqlPart;
+	private String sqlStr;
+
+	private String sqlPart;
 }

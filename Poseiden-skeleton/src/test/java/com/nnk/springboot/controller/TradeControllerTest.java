@@ -29,165 +29,123 @@ import javassist.NotFoundException;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebMvcTest(TradeController.class)
 public class TradeControllerTest {
-	
-    @Autowired
-    private MockMvc mockMvc;
-    
-    @MockBean
-    private TradeService tradeService;
-    
-    @MockBean
-    private TradeRepository tradeRepository;
-	
-    private Trade trade = new Trade();
-    
-    
 
-    @Before
-    public void addTrade() {
+	@Autowired
+	private MockMvc mockMvc;
+
+	@MockBean
+	private TradeService tradeService;
+
+	@MockBean
+	private TradeRepository tradeRepository;
+
+	private Trade trade = new Trade();
+
+	@Before
+	public void addTrade() {
 		trade.setAccount("account");
 		trade.setType("type");
 		trade.setBuyQuantity(1.0);
 		tradeService.createTrade(trade);
-    }
-
-    @Test
-    @WithMockUser(username="user",roles="ADMIN")
-    public void getTradeTest() throws Exception {
-
-        mockMvc.perform(get("/trade/list"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("trade/list"));
-    }
-    
-    @Test
-    @WithMockUser(username="user",roles="ADMIN")
-    public void getTradeAddTest() throws Exception {
-        mockMvc.perform(get("/trade/add"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("trade/add"))
-                .andExpect(model().attributeExists("trade"));
-         
-    }
-    
-    @Test
-    @WithMockUser(username="user",roles="ADMIN")
-    public void postTradeTest() throws Exception {
-		trade.setAccount("account");
-		trade.setType("type");
-		trade.setBuyQuantity(1.0);
-		
-        mockMvc.perform(post("/trade/validate")
-                .param("account", trade.getAccount())
-                .param("type", trade.getType())
-                .param("buyQuantity", String.valueOf(trade.getBuyQuantity()))
-                .with(csrf()))
-                .andDo(print())
-                .andExpect(view().name("redirect:/trade/list"))
-                .andExpect(status().is3xxRedirection());
-      
-    }
-
-    @Test
-    @WithMockUser(username="user",roles="ADMIN")
-    public void postTradeWithErrorTest() throws Exception {
-        mockMvc.perform(post("/trade/validate")
-           //     .param("account", trade.getAccount())
-                .param("type", trade.getType())
-                .param("buyQuantity", String.valueOf(trade.getBuyQuantity()))
-                .with(csrf()))
-                .andDo(print())
-                .andExpect(view().name("trade/add"))
-                .andExpect(status().is2xxSuccessful());
-            
-    }
-
-    @Test
-    @WithMockUser(username="user",roles="ADMIN")
-    public void getTradetUpdateByExistingIdTest() throws Exception {
-		trade.setAccount("account");
-		trade.setType("type");
-		trade.setBuyQuantity(1.0);
-		
-		when(tradeService.getTradeById(1)).thenReturn(trade);
-
-        mockMvc.perform(get("/trade/update/1"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("trade/update"))
-                .andExpect(model().attributeExists("trade"));
-    }
-
-    @Test
-    @WithMockUser(username="user",roles="ADMIN")
-    public void getTradeUpdateByUnknownIdTest() throws Exception {
-		trade.setAccount("account");
-		trade.setType("type");
-		trade.setBuyQuantity(1.0);
-		
-		
-
-		when(tradeService.getTradeById(5)).thenThrow(new NotFoundException("trade Id : "+5+" not exist"));
-		
-        mockMvc.perform(get("/trade/update/5")
-                .param("account", trade.getAccount())
-                .param("type", trade.getType())
-                .param("buyQuantity", String.valueOf(trade.getBuyQuantity()))
-        		.with(csrf()))   
-                .andExpect(status().isOk())
-                .andExpect(view().name("errorNotFound"));
-    }
-
-    
-    @Test
-    @WithMockUser(username="user",roles="ADMIN")
-    public void postTradeUpdateTest() throws Exception {
-		trade.setAccount("account");
-		trade.setType("type");
-		trade.setBuyQuantity(1.0);
-		
-    	when(tradeService.updateTrade(1, trade)).thenReturn(trade);
-    		
-        mockMvc.perform(post("/trade/update/1")
-                .param("account", trade.getAccount())
-                .param("type", trade.getType())
-                .param("buyQuantity", String.valueOf(trade.getBuyQuantity()))
-                .with(csrf()))
-              	.andDo(print())
-                .andExpect(view().name("redirect:/trade/list"))
-                .andExpect(status().is3xxRedirection());
-    }
-
- 
+	}
 
 	@Test
-    @WithMockUser(username="user",roles="ADMIN")
-    public void postTradeUpdateWithErrorTest() throws Exception {
-		
-        mockMvc.perform(post("/trade/update/1")
-            //    .param("account", trade.getAccount())
-           //     .param("type", trade.getType())
-                .param("buyQuantity", String.valueOf(trade.getBuyQuantity()))
-                .with(csrf()))
-                .andDo(print())
-                .andExpect(view().name("trade/update"))
-                .andExpect(status().is2xxSuccessful())  
-                .andReturn().getResponse().containsHeader("Account is mandatory");
-    }
+	@WithMockUser(username = "user", roles = "ADMIN")
+	public void getTradeTest() throws Exception {
 
+		mockMvc.perform(get("/trade/list")).andDo(print()).andExpect(status().isOk())
+				.andExpect(view().name("trade/list"));
+	}
 
+	@Test
+	@WithMockUser(username = "user", roles = "ADMIN")
+	public void getTradeAddTest() throws Exception {
+		mockMvc.perform(get("/trade/add")).andDo(print()).andExpect(status().isOk()).andExpect(view().name("trade/add"))
+				.andExpect(model().attributeExists("trade"));
 
-    @Test
-    @WithMockUser(username="user",roles="ADMIN")
-    public void getTradeDeleteByIdTest() throws Exception {
+	}
 
-        mockMvc.perform(get("/trade/delete/1"))
-                .andDo(print())
-                .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/trade/list"));
-    }
+	@Test
+	@WithMockUser(username = "user", roles = "ADMIN")
+	public void postTradeTest() throws Exception {
+		trade.setAccount("account");
+		trade.setType("type");
+		trade.setBuyQuantity(1.0);
+
+		mockMvc.perform(post("/trade/validate").param("account", trade.getAccount()).param("type", trade.getType())
+				.param("buyQuantity", String.valueOf(trade.getBuyQuantity())).with(csrf())).andDo(print())
+				.andExpect(view().name("redirect:/trade/list")).andExpect(status().is3xxRedirection());
+
+	}
+
+	@Test
+	@WithMockUser(username = "user", roles = "ADMIN")
+	public void postTradeWithErrorTest() throws Exception {
+		mockMvc.perform(post("/trade/validate")
+				// .param("account", trade.getAccount())
+				.param("type", trade.getType()).param("buyQuantity", String.valueOf(trade.getBuyQuantity()))
+				.with(csrf())).andDo(print()).andExpect(view().name("trade/add")).andExpect(status().is2xxSuccessful());
+
+	}
+
+	@Test
+	@WithMockUser(username = "user", roles = "ADMIN")
+	public void getTradetUpdateByExistingIdTest() throws Exception {
+		trade.setAccount("account");
+		trade.setType("type");
+		trade.setBuyQuantity(1.0);
+
+		when(tradeService.getTradeById(1)).thenReturn(trade);
+
+		mockMvc.perform(get("/trade/update/1")).andDo(print()).andExpect(status().isOk())
+				.andExpect(view().name("trade/update")).andExpect(model().attributeExists("trade"));
+	}
+
+	@Test
+	@WithMockUser(username = "user", roles = "ADMIN")
+	public void getTradeUpdateByUnknownIdTest() throws Exception {
+		trade.setAccount("account");
+		trade.setType("type");
+		trade.setBuyQuantity(1.0);
+
+		when(tradeService.getTradeById(5)).thenThrow(new NotFoundException("trade Id : " + 5 + " not exist"));
+
+		mockMvc.perform(get("/trade/update/5").param("account", trade.getAccount()).param("type", trade.getType())
+				.param("buyQuantity", String.valueOf(trade.getBuyQuantity())).with(csrf())).andExpect(status().isOk())
+				.andExpect(view().name("errorNotFound"));
+	}
+
+	@Test
+	@WithMockUser(username = "user", roles = "ADMIN")
+	public void postTradeUpdateTest() throws Exception {
+		trade.setAccount("account");
+		trade.setType("type");
+		trade.setBuyQuantity(1.0);
+
+		when(tradeService.updateTrade(1, trade)).thenReturn(trade);
+
+		mockMvc.perform(post("/trade/update/1").param("account", trade.getAccount()).param("type", trade.getType())
+				.param("buyQuantity", String.valueOf(trade.getBuyQuantity())).with(csrf())).andDo(print())
+				.andExpect(view().name("redirect:/trade/list")).andExpect(status().is3xxRedirection());
+	}
+
+	@Test
+	@WithMockUser(username = "user", roles = "ADMIN")
+	public void postTradeUpdateWithErrorTest() throws Exception {
+
+		mockMvc.perform(post("/trade/update/1")
+				// .param("account", trade.getAccount())
+				// .param("type", trade.getType())
+				.param("buyQuantity", String.valueOf(trade.getBuyQuantity())).with(csrf())).andDo(print())
+				.andExpect(view().name("trade/update")).andExpect(status().is2xxSuccessful()).andReturn().getResponse()
+				.containsHeader("Account is mandatory");
+	}
+
+	@Test
+	@WithMockUser(username = "user", roles = "ADMIN")
+	public void getTradeDeleteByIdTest() throws Exception {
+
+		mockMvc.perform(get("/trade/delete/1")).andDo(print()).andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/trade/list"));
+	}
 }
-    
-    
