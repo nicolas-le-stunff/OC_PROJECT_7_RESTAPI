@@ -1,25 +1,67 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8"/>
+<meta charset="utf-8" />
 <title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
-	<div class="row">
-		<h2>Update Bid</h2>
-	</div>
+	<div class="container">
+		<div class="row">
+			<h2>Update Bid</h2>
+		</div>
 
-	<div class="row">
-		<form action="#" th:action="@{/bidList/update/{id}(id=${bidList.bidListId})}" th:object="${bidList}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to edit the values of Bid, there are 2 buttons: Update data and Cancel to the list Bid
-			 -->
-		</form>
-	</div>
 
-</div>
+		<div class="row">
+			<form action="#"
+				th:action="@{/bidList/update/{id}(id=${bidList.id})}"
+				th:object="${bidList}" method="post" class="form-horizontal"
+				style="width: 100%">
+				<div class="form-group">
+					<input type="hidden" th:field="*{id}" class="form-control">
+				</div>
+
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<label>Account</label> <input type="text" th:field="*{account}"
+							class="form-control" id="accountBidListInput"
+							aria-describedby="accountBidListHelp" placeholder="Account Name"
+							th:value="${bidList.account}">
+						<p th:if="${#fields.hasErrors('account')}"
+							class="label label-danger" th:errors="*{account}"></p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<label>Type</label> <input type="text" th:field="*{type}"
+							class="form-control" id="typeBidListInput"
+							aria-describedby="typeBidListHelp" placeholder="Account Type"
+							th:value="${bidList.type}">
+						<p th:if="${#fields.hasErrors('type')}" class="label label-danger"
+							th:errors="*{type}"></p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<label>Bid quantity</label> <input type="number" step="0.01"
+							th:field="*{bidQuantity}" class="form-control"
+							id="bidQuantityBidListInput"
+							aria-describedby="bidQuantityBidListHelp"
+							th:value="${bidList.bidQuantity}">
+					</div>
+				</div>
+
+				<div class="row">
+					<a class="btn btn-danger" href="/bidList/list" role="button">Cancel</a>
+					<button type="submit" class="btn btn-primary">Update
+						BidList</button>
+				</div>
+			</form>
+		</div>
+
+	</div>
 </body>
 </html>
