@@ -4,11 +4,13 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
-@Getter
+//@Getter
+//@Setter
+@Data
 @Entity
 @Table(name = "bidlist")
 public class BidList {

@@ -3,13 +3,15 @@ package com.nnk.springboot.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
 
-@Getter
-@Setter
+//@Getter
+//@Setter
+@Data
 @Entity
 @Table(name = "trade")
 public class Trade {
@@ -17,7 +19,8 @@ public class Trade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "trade_id")
     private Integer tradeId;
-
+    
+    @NotBlank(message = "account is mandatory")
     private String account;
 
     private String type;

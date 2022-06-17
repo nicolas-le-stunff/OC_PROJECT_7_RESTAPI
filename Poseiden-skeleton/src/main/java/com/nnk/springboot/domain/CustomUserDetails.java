@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nnk.springboot.repositories.UserRepository;
 
-
+@lombok.Generated
 public class CustomUserDetails implements UserDetails {
 
 	private static final long serialVersionUID = 1L;

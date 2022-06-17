@@ -27,12 +27,4 @@ public class User {
     
     String role;
 
-    public Boolean isAdmin() {
-    	if(role == "ADMIN") {
-    		return true;
-    	}else{
-    		return false;
-    	}
-    }
-
 }

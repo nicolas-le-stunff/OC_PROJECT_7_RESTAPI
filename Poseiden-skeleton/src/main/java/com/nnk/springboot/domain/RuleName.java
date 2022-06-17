@@ -10,15 +10,17 @@ import lombok.Setter;
 import java.sql.Timestamp;
 
 
-@Getter
-@Setter
+//@Getter
+//@Setter
+@Data
 @Entity
 @Table(name = "rulename")
 public class RuleName {
 	  @Id
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	  private Integer id;
-
+	  
+	  @NotBlank(message = "Name is mandatory") 
 	  private String name;
 
 	  private String description;
